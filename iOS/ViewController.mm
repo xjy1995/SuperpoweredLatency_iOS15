@@ -134,9 +134,7 @@ static void streamFormatChangedCallback(void *inRefCon, AudioUnit inUnit, AudioU
     measurer = new latencyMeasurer();
 
     // Set up the audio session. Prefer 48 kHz and 64 samples.
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions: AVAudioSessionCategoryOptionAllowBluetoothA2DP error:NULL];
-    // Default mode adds 30 ms of additional latency for the built-in microphone on iOS devices from the first iPad Air.
-    [[AVAudioSession sharedInstance] setMode:AVAudioSessionModeDefault error:NULL];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeMeasurement options: AVAudioSessionCategoryOptionAllowBluetoothA2DP error:NULL];
     [[AVAudioSession sharedInstance] setPreferredSampleRate:48000 error:NULL];
     [[AVAudioSession sharedInstance] setPreferredIOBufferDuration:32.0 / 48000.0 error:NULL];
     [[AVAudioSession sharedInstance] setActive:YES error:NULL];
